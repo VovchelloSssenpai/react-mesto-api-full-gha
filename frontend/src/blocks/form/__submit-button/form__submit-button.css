@@ -1,0 +1,28 @@
+.form__submit-button {
+  display: block;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  padding: 13px 129px 17px 129px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  border: none;
+  border-radius: 2px;
+  margin: auto;
+  /* font */
+  font-weight: 400;
+  font-size: 18px;
+  line-height: calc(22 / 18);
+}
+
+.form__submit-button:hover {
+  background-color: rgb(0, 0, 0, 0.8);
+}
+
+@media (max-width: 641px) {
+  .form__submit-button {
+    padding: 16px 81px 16px 79px;
+    /* font */
+    font-size: 14px;
+    line-height: calc(17 / 14);
+  }
+}

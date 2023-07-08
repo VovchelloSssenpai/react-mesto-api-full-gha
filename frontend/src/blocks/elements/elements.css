@@ -1,0 +1,9 @@
+.elements {
+  padding-bottom: 67px;
+}
+
+@media (max-width: 641px) {
+  .elements {
+    padding-bottom: 48px;
+  }
+}

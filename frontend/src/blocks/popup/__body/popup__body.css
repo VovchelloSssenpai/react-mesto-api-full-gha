@@ -1,0 +1,19 @@
+.popup__body {
+  color: black;
+  background-color: white;
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  padding: 34px 0 37px 0;
+  cursor: default;
+}
+
+@media (max-width: 641px) {
+  .popup__body {
+    width: 282px;
+    padding: 0 0 25px 0;
+  }
+}

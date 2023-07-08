@@ -1,0 +1,15 @@
+.main {
+  width: 68.7%;
+}
+
+@media (max-width: 845px) {
+  .main {
+    width: 80%;
+  }
+}
+
+@media (max-width: 641px) {
+  .main {
+    width: 88.2%;
+  }
+}

@@ -1,0 +1,12 @@
+.form__submit-button-dark{
+    color: black;
+    background-color: white;
+    margin: 177px 0 0 0;
+    padding: 13px 87px 17px 87px;
+}
+
+
+.form__submit-button-dark:hover {
+    background-color: #ffffff85;
+  }
+  

@@ -1,0 +1,12 @@
+.form__label {
+  position: relative;
+  max-width: 358px;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+@media (max-width: 641px) {
+  .form__label {
+    margin-bottom: 60;
+  }
+}

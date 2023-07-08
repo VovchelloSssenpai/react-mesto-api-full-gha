@@ -1,0 +1,25 @@
+.form__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 10px 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(17 / 14);
+  padding-bottom: 8px;
+
+  /* overflow */
+  /* white-space: nowrap;
+  overflow: hidden; */
+}
+
+/* .popup__input:last-of-type {
+  margin: 0 0 48px 0;
+} */
+
+@media (max-width: 641px) {
+  .form__input:last-of-type {
+    margin: 0 0 0px 0;
+  }
+}

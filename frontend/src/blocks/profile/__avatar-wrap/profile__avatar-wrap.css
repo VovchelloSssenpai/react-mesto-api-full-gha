@@ -1,0 +1,8 @@
+.profile__avatar-wrap {
+  position: relative;
+  transition: filter 0.5s;
+}
+
+.profile__avatar-wrap:hover .profile__avatar {
+  filter: brightness(80%);
+}

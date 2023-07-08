@@ -1,0 +1,12 @@
+.signpage__link{
+    color: white;
+    text-decoration: none;
+    transition: color 0.5s;
+}
+
+
+
+
+.signpage__link:hover {
+    color: #ffffff85;
+}
