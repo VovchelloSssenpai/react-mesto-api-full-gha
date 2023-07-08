@@ -3,20 +3,22 @@ const WrongDataError = require('../utils/WrongDataError');
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
-  let token;
-  let payload;
-  if (authorization.includes('Bearer')) { token = authorization.replace('Bearer ', ''); } else {
-    token = authorization;
-  }
+  if (authorization) {
+    let token;
+    let payload;
+    if (authorization.includes('Bearer')) { token = authorization.replace('Bearer ', ''); } else {
+      token = authorization;
+    }
 
-  try {
-    payload = jwt.verify(token, 'SECRET');
-  } catch (err) {
-    next(new WrongDataError());
-  }
+    try {
+      payload = jwt.verify(token, 'SECRET');
+    } catch (err) {
+      next(new WrongDataError());
+    }
 
-  req.user = payload;
-  return next();
+    req.user = payload;
+    return next();
+  } return next(new WrongDataError());
 };
 
 module.exports = auth;
