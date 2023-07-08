@@ -3,6 +3,7 @@ const jsonWebToken = require('jsonwebtoken');
 const WrongDataError = require('../utils/WrongDataError');
 const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
+const { JWT_SECRET } = require('../utils/utils');
 
 const getUserById = (
   (req, res, next) => {
@@ -72,7 +73,7 @@ const login = (
           if (isValidUser) {
             const jwt = jsonWebToken.sign({
               _id: user._id,
-            }, 'SECRET');
+            }, JWT_SECRET);
 
             res.send({ data: user.toJSON(), token: jwt });
           } else {

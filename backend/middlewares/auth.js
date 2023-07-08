@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const WrongDataError = require('../utils/WrongDataError');
+const { JWT_SECRET } = require('../utils/utils');
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
@@ -11,7 +12,7 @@ const auth = (req, res, next) => {
     }
 
     try {
-      payload = jwt.verify(token, 'SECRET');
+      payload = jwt.verify(token, JWT_SECRET);
     } catch (err) {
       next(new WrongDataError());
     }

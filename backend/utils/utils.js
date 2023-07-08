@@ -1,9 +1,11 @@
 const INCORRECT_ERROR_CODE = 400;
 const NOT_FOUND_ERROR_CODE = 404;
 const DEFAULT_ERROR_CODE = 500;
+const { JWT_SECRET } = process.env;
 
 module.exports = {
   INCORRECT_ERROR_CODE,
   NOT_FOUND_ERROR_CODE,
   DEFAULT_ERROR_CODE,
+  JWT_SECRET,
 };
