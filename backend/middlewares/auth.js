@@ -16,7 +16,7 @@ const auth = (req, res, next) => {
     } catch (err) {
       next(new WrongDataError());
     }
-
+console.log(JWT_SECRET);
     req.user = payload;
     return next();
   } return next(new WrongDataError());
