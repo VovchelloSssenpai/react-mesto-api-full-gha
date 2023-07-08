@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const WrongDataError = require('../utils/WrongDataError');
-const { JWT_SECRET, NODE_ENV } = require('../utils/utils');
+const { JWT_SECRET, NODE_ENV, DEV_SECRET } = require('../utils/utils');
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
     }
 
     try {
-      payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+      payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET);
     } catch (err) {
       next(new WrongDataError());
     }
