@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.29.69
 
-Frontend https://...
+Frontend https://mestovova.nomoredomains.work
 
-Backend https://...
+Backend https://mestovova.nomoredomains.work/api

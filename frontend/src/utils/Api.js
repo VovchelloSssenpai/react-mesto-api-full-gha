@@ -120,13 +120,13 @@ authorizationCheck(data){
 }
 }
 
-const api = new Api({ baseUrl: "http://localhost:3000",
+const api = new Api({ baseUrl: "http://mestovova.nomoredomains.work/api",
 headers: {
   "Content-Type": "application/json",
 },});
 
 
-const authApi = new Api({baseUrl: "http://localhost:3000", 
+const authApi = new Api({baseUrl: "http://mestovova.nomoredomains.work/api", 
 headers: {
   "Content-Type": "application/json" }})
 
