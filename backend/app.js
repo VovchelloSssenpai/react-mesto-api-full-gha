@@ -27,7 +27,7 @@ app.use(cors({ credentials: true }));
 //   res.setHeader('Access-Control-Allow-Credentials', 'true');
 //   next();
 // });
-app.use('/api', router);
+app.use(router);
 
 app.use(limiter);
 app.use(errorLogger);
