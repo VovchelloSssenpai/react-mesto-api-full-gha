@@ -179,11 +179,11 @@ useEffect(() => {
         onDeleteClick={handleCardDelete}  
         />
       :
-  <Navigate to="/sign-in" replace />
+  <Navigate to="/signin" replace />
         }>
         </Route>
-        <Route path='/sign-up' element={<Register onRegister={handleRegistration} isLoading={isLoading} />} ></Route>
-        <Route path='/sign-in' element={<Login onAuthorize={handleAuthorization}  
+        <Route path='/signup' element={<Register onRegister={handleRegistration} isLoading={isLoading} />} ></Route>
+        <Route path='/signin' element={<Login onAuthorize={handleAuthorization}  
                                               setProfileData={setProfileData} 
                                               setFormValue={setFormValue} 
                                               formValue={authorizationFormValue}

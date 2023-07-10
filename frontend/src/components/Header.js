@@ -6,14 +6,14 @@ function Header({setProfileData, profileData}) {
 
     function signOut(){
       localStorage.removeItem('token');
-      navigate('/sign-in');
+      navigate('/signin');
       setProfileData("")
     }
     const location = useLocation();
 
     function handleNavigation(){
-      if (location.pathname === "/sign-in") {return <button className='header__button' onClick={ () => {navigate('/sign-up')}}>Регистрация</button>}
-      else if(location.pathname === "/sign-up"){return <button className='header__button' onClick={() => {navigate('/sign-in')}}>Войти</button>}
+      if (location.pathname === "/signin") {return <button className='header__button' onClick={ () => {navigate('/signup')}}>Регистрация</button>}
+      else if(location.pathname === "/signup"){return <button className='header__button' onClick={() => {navigate('/signin')}}>Войти</button>}
       else if(location.pathname === "/"){return <button className='header__button' onClick={signOut}>Выйти</button>}
     }
 

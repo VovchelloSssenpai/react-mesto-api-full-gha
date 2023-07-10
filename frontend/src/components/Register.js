@@ -27,7 +27,7 @@ const handleSubmit = (e) => {
                                 handleSubmit={handleSubmit} 
                                 formValue={formValue} 
                                 button={isLoading ? "Регистрация..." : "Зарегистрироваться"} >
-            <p className="signpage__question">Уже зарегистрированы? <Link to={'/sign-in'} className="signpage__link">Войти</Link> </p>
+            <p className="signpage__question">Уже зарегистрированы? <Link to={'/signin'} className="signpage__link">Войти</Link> </p>
             </AuthorizationFrom>
         </div>
     );
