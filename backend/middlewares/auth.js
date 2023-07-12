@@ -14,12 +14,12 @@ const auth = (req, res, next) => {
     try {
       payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET);
     } catch (err) {
-      next(new WrongDataError());
+      next(new WrongDataError('Ошибка авторизации'));
     }
 
     req.user = payload;
     return next();
-  } return next(new WrongDataError());
+  } return next(new WrongDataError('Ошибка авторизации'));
 };
 
 module.exports = auth;

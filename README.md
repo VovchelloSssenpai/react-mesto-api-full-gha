@@ -13,4 +13,4 @@ IP 158.160.29.69
 
 Frontend https://mestovova.nomoredomains.work
 
-Backend https://mestovova.nomoredomains.work/api
+Backend https://api.mestovova.nomoredomains.work

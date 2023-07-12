@@ -8,7 +8,7 @@ router.get('/me', getUser);
 
 router.get('/:id', celebrate({
   params: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    id: Joi.string().required().hex().length(24),
   }),
 }), getUserById);
 
@@ -16,9 +16,10 @@ router.get('/', getUsers);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30).default('Жак-Ив Кусто'),
-    about: Joi.string().min(2).max(30).default('Исследователь'),
-    avatar: Joi.string().default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png'),
+    name: Joi.string().required().min(2).max(30)
+      .default('Жак-Ив Кусто'),
+    about: Joi.string().required().min(2).max(30)
+      .default('Исследователь'),
   }),
 }), updateUser);
 

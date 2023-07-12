@@ -9,26 +9,26 @@ const LimitedAccessError = require('../utils/LimitedAccessError');
 const errorHandler = (err, req, res, next) => {
   let error;
   console.log(err);
-  if (err.message.includes('Validation failed')) {
-    error = new IncorrectError();
-  } else if (err.message === 'Not found' || err.message === 'Пользователь не найден') {
-    error = new NotFoundError();
-  } else if (err.name === 'CastError') {
-    error = new IncorrectError();
-  } else if (err.code === 11000) {
-    error = new ConflictError();
-  } else if (err.name === 'WrongDataError') {
-    error = new WrongDataError();
-  } else if (err.name === 'LimitedAccess') {
-    error = new LimitedAccessError();
-  } else {
-    error = new DefaultError();
-  }
+  // if (err.message.includes('Validation failed')) {
+  //   error = new IncorrectError();
+  // } else if (err.message === 'Not found' || err.message === 'Пользователь не найден') {
+  //   error = new NotFoundError();
+  // } else if (err.name === 'CastError') {
+  //   error = new IncorrectError();
+  // } else if (err.code === 11000) {
+  //   error = new ConflictError();
+  // } else if (err.name === 'WrongDataError') {
+  //   error = new WrongDataError();
+  // } else if (err.name === 'LimitedAccess') {
+  //   error = new LimitedAccessError();
+  // } else {
+  //   error = new DefaultError();
+  // }
 
   res
-    .status(error.statusCode)
+    .status(err.statusCode)
     .send({
-      message: error.message,
+      message: err.message,
     });
 };
 

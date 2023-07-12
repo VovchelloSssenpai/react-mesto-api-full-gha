@@ -3,14 +3,15 @@ const jsonWebToken = require('jsonwebtoken');
 const WrongDataError = require('../utils/WrongDataError');
 const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
+const IncorrectError = require('../utils/IncorrectError');
 const { JWT_SECRET, NODE_ENV, DEV_SECRET } = require('../utils/utils');
 
 const getUserById = (
   (req, res, next) => {
     User.findById(req.params.id)
-      .orFail(() => new Error('Not found'))
+      .orFail(() => new IncorrectError('Неверные данные'))
       .then((user) => { res.send(user); })
-      .catch(next);
+      .catch(next(new NotFoundError('Пользователь не найден')));
   });
 
 const getUsers = (
@@ -23,9 +24,9 @@ const getUsers = (
 const getUser = (
   (req, res, next) => {
     User.findById(req.user._id)
-      .orFail(() => new Error('Not found'))
+      .orFail(() => new IncorrectError('Неверные данные'))
       .then((user) => { res.send(user); })
-      .catch(next);
+      .catch(next(new NotFoundError('Пользователь не найден')));
   });
 
 const createUser = (
@@ -42,7 +43,7 @@ const createUser = (
       .then((hashedPassword) => {
         User.create({ ...userData, password: hashedPassword })
           .then((user) => res.status(201).send(user))
-          .catch(next);
+          .catch(next(new IncorrectError('Ошибка валидации')));
       });
   });
 
@@ -50,7 +51,7 @@ const updateUser = (
   (req, res, next) => {
     const { name, about } = req.body;
     User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-      .then((user) => { if (!user) { throw new NotFoundError(); } return res.send(user); })
+      .then((user) => { if (!user) { throw new NotFoundError('Пользователь не найден'); } return res.send(user); })
       .catch(next);
   });
 
@@ -58,7 +59,7 @@ const updateAvatar = (
   (req, res, next) => {
     const { avatar } = req.body;
     User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-      .then((user) => { if (!user) { throw new NotFoundError(); } return res.send(user); })
+      .then((user) => { if (!user) { throw new NotFoundError('Пользователь не найден'); } return res.send(user); })
       .catch(next);
   });
 
@@ -67,7 +68,7 @@ const login = (
     const { email, password } = req.body;
     User.findOne({ email })
       .select('+password')
-      .orFail(() => new WrongDataError())
+      .orFail(() => new WrongDataError('Неверные данные'))
       .then((user) => {
         bcrypt.compare(String(password), user.password).then((isValidUser) => {
           if (isValidUser) {
@@ -77,7 +78,7 @@ const login = (
 
             res.send({ data: user.toJSON(), token: jwt });
           } else {
-            next(new WrongDataError());
+            next(new WrongDataError('Неверные данные'));
           }
         });
       })
