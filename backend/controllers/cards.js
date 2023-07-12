@@ -10,7 +10,7 @@ const getCards = ((req, res, next) => {
 
 const deleteCardById = ((req, res, next) => {
   Card.findById(req.params.id)
-    .orFail(() => new NotFoundError('Неверные данные'))
+    .orFail(() => new LimitedAccessError('Пользователь не найден'))
     .then((user) => {
       console.log(user);
       if (req.user._id !== user.owner.toString()) {
