@@ -17,7 +17,7 @@ const deleteCardById = ((req, res, next) => {
       }
       return Card.findByIdAndRemove(req.params.id).then((data) => res.send(data));
     })
-    .catch(next(new NotFoundError('Пользователь не найден')));
+    .catch(() => next(new NotFoundError('Пользователь не найден')));
 });
 
 const createCard = ((req, res, next) => {
@@ -29,7 +29,7 @@ const createCard = ((req, res, next) => {
 
   Card.create(cardData)
     .then((user) => res.status(201).send(user))
-    .catch(next(new IncorrectError('Неверные данные')));
+    .catch(() => next(new IncorrectError('Неверные данные')));
 });
 
 const likeCard = ((req, res, next) => {
@@ -40,7 +40,7 @@ const likeCard = ((req, res, next) => {
   )
     .orFail(() => new IncorrectError('Неверные данные'))
     .then((user) => { res.status(201).send(user); })
-    .catch(next(new NotFoundError('Пользователь не найден')));
+    .catch(() => next(new NotFoundError('Пользователь не найден')));
 }
 );
 
@@ -51,7 +51,7 @@ const dislikeCard = ((req, res, next) => Card.findByIdAndUpdate(
 )
   .orFail(() => new IncorrectError('Неверные данные'))
   .then((user) => { res.send(user); })
-  .catch(next(new NotFoundError('Пользователь не найден'))));
+  .catch(() => next(new NotFoundError('Пользователь не найден'))));
 
 module.exports = {
   getCards, deleteCardById, createCard, likeCard, dislikeCard,

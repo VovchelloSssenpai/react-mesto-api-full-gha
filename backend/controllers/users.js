@@ -11,7 +11,7 @@ const getUserById = (
     User.findById(req.params.id)
       .orFail(() => new IncorrectError('Неверные данные'))
       .then((user) => { res.send(user); })
-      .catch(next(new NotFoundError('Пользователь не найден')));
+      .catch(() => next(new NotFoundError('Пользователь не найден')));
   });
 
 const getUsers = (
@@ -26,7 +26,7 @@ const getUser = (
     User.findById(req.user._id)
       .orFail(() => new IncorrectError('Неверные данные'))
       .then((user) => { res.send(user); })
-      .catch(next(new NotFoundError('Пользователь не найден')));
+      .catch(() => next(new NotFoundError('Пользователь не найден')));
   });
 
 const createUser = (
@@ -42,8 +42,8 @@ const createUser = (
     bcrypt.hash(String(req.body.password), 10)
       .then((hashedPassword) => {
         User.create({ ...userData, password: hashedPassword })
-          .then((user) => res.status(201).send(user))
-          .catch(next(new IncorrectError('Ошибка валидации')));
+          .then((user) => { res.status(201).send(user); console.log(user); })
+          .catch(() => next(new IncorrectError('Ошибка валидации')));
       });
   });
 
