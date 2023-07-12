@@ -10,10 +10,11 @@ const getCards = ((req, res, next) => {
 
 const deleteCardById = ((req, res, next) => {
   Card.findById(req.params.id)
-    .orFail(() => new IncorrectError('Неверные данные'))
+    .orFail(() => new LimitedAccessError('Доступ ограничен'))
     .then((user) => {
+      console.log(user);
       if (req.user._id !== user.owner.toString()) {
-        throw new LimitedAccessError();
+        throw new LimitedAccessError('Доступ ограничен');
       }
       return Card.findByIdAndRemove(req.params.id).then((data) => res.send(data));
     })

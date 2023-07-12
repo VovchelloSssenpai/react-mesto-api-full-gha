@@ -5,6 +5,7 @@ const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
 const IncorrectError = require('../utils/IncorrectError');
 const { JWT_SECRET, NODE_ENV, DEV_SECRET } = require('../utils/utils');
+const ConflictError = require('../utils/ConflictError');
 
 const getUserById = (
   (req, res, next) => {
@@ -42,8 +43,8 @@ const createUser = (
     bcrypt.hash(String(req.body.password), 10)
       .then((hashedPassword) => {
         User.create({ ...userData, password: hashedPassword })
-          .then((user) => { res.status(201).send(user); console.log(user); })
-          .catch(() => next(new IncorrectError('Ошибка валидации')));
+          .then((user) => { res.status(201).send(user); })
+          .catch(() => next(new ConflictError('Ошибка валидации')));
       });
   });
 
