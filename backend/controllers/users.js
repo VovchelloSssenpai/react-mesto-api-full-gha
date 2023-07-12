@@ -69,7 +69,7 @@ const login = (
     const { email, password } = req.body;
     User.findOne({ email })
       .select('+password')
-      .orFail(() => new WrongDataError('Неверные данные'))
+      .orFail(() => new WrongDataError('Ошибка авторизации'))
       .then((user) => {
         bcrypt.compare(String(password), user.password).then((isValidUser) => {
           if (isValidUser) {
@@ -79,7 +79,7 @@ const login = (
 
             res.send({ data: user.toJSON(), token: jwt });
           } else {
-            next(new WrongDataError('Неверные данные'));
+            next(new WrongDataError('Ошибка авторизации'));
           }
         });
       })

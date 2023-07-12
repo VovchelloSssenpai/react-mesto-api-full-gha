@@ -120,14 +120,26 @@ authorizationCheck(data){
 }
 }
 
-const api = new Api({ baseUrl: "https://api.mestovova.nomoredomains.work",
-headers: {
-  "Content-Type": "application/json",
-},});
+// const api = new Api({ baseUrl: "https://api.mestovova.nomoredomains.work",
+// headers: {
+//   "Content-Type": "application/json",
+// },});
 
 
-const authApi = new Api({baseUrl: "https://api.mestovova.nomoredomains.work", 
-headers: {
-  "Content-Type": "application/json" }})
+// const authApi = new Api({baseUrl: "https://api.mestovova.nomoredomains.work", 
+// headers: {
+//   "Content-Type": "application/json" }})
+
+
+  const api = new Api({ baseUrl: "http://localhost:3000",
+  headers: {
+    "Content-Type": "application/json",
+  },});
+  
+  
+  const authApi = new Api({baseUrl: "http://localhost:3000", 
+  headers: {
+    "Content-Type": "application/json" }})
+
 
 export  {api, authApi};
