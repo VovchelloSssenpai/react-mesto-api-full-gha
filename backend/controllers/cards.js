@@ -10,15 +10,15 @@ const getCards = ((req, res, next) => {
 
 const deleteCardById = ((req, res, next) => {
   Card.findById(req.params.id)
-    .orFail(() => new LimitedAccessError('Доступ ограничен'))
+    .orFail(() => new NotFoundError('Неверные данные'))
     .then((user) => {
       console.log(user);
       if (req.user._id !== user.owner.toString()) {
-        throw new LimitedAccessError('Доступ ограничен');
+        throw new IncorrectError('Неверные данные');
       }
       return Card.findByIdAndRemove(req.params.id).then((data) => res.send(data));
     })
-    .catch(() => next(new NotFoundError('Пользователь не найден')));
+    .catch(() => next(new LimitedAccessError('Пользователь не найден')));
 });
 
 const createCard = ((req, res, next) => {
