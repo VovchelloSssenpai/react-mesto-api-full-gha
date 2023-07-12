@@ -18,7 +18,7 @@ const deleteCardById = ((req, res, next) => {
       }
       return Card.findByIdAndRemove(req.params.id).then((data) => res.send(data));
     })
-    .catch(() => next(new LimitedAccessError('Пользователь не найден')));
+    .catch((err) => { next(new NotFoundError('Пользователь не найден')); console.log(err); });
 });
 
 const createCard = ((req, res, next) => {
