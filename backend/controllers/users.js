@@ -10,9 +10,9 @@ const ConflictError = require('../utils/ConflictError');
 const getUserById = (
   (req, res, next) => {
     User.findById(req.params.id)
-      .orFail(() => new IncorrectError('Неверные данные'))
+      .orFail(() => new NotFoundError('Пользователь не найден'))
       .then((user) => { res.send(user); })
-      .catch(() => next(new NotFoundError('Пользователь не найден')));
+      .catch(next);
   });
 
 const getUsers = (
@@ -25,9 +25,9 @@ const getUsers = (
 const getUser = (
   (req, res, next) => {
     User.findById(req.user._id)
-      .orFail(() => new IncorrectError('Неверные данные'))
+      .orFail(() => new NotFoundError('Пользователь не найден'))
       .then((user) => { res.send(user); })
-      .catch(() => next(new NotFoundError('Пользователь не найден')));
+      .catch(next);
   });
 
 const createUser = (
@@ -44,7 +44,7 @@ const createUser = (
       .then((hashedPassword) => {
         User.create({ ...userData, password: hashedPassword })
           .then((user) => { res.status(201).send(user); })
-          .catch(() => next(new ConflictError('Ошибка валидации')));
+          .catch(next);
       });
   });
 
@@ -69,7 +69,7 @@ const login = (
     const { email, password } = req.body;
     User.findOne({ email })
       .select('+password')
-      .orFail(() => new WrongDataError('Ошибка авторизации'))
+      .orFail(() => new NotFoundError('Пользователь не найден'))
       .then((user) => {
         bcrypt.compare(String(password), user.password).then((isValidUser) => {
           if (isValidUser) {

@@ -29,7 +29,7 @@ const createCard = ((req, res, next) => {
 
   Card.create(cardData)
     .then((user) => res.status(201).send(user))
-    .catch(() => next(new IncorrectError('Неверные данные')));
+    .catch(next);
 });
 
 const likeCard = ((req, res, next) => {
@@ -38,9 +38,9 @@ const likeCard = ((req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(() => new IncorrectError('Неверные данные'))
+    .orFail(() => new NotFoundError('Пользователь не найден'))
     .then((user) => { res.status(201).send(user); })
-    .catch(() => next(new NotFoundError('Пользователь не найден')));
+    .catch(next);
 }
 );
 
@@ -49,9 +49,9 @@ const dislikeCard = ((req, res, next) => Card.findByIdAndUpdate(
   { $pull: { likes: req.user._id } },
   { new: true },
 )
-  .orFail(() => new IncorrectError('Неверные данные'))
+  .orFail(() => new NotFoundError('Пользователь не найден'))
   .then((user) => { res.send(user); })
-  .catch(() => next(new NotFoundError('Пользователь не найден'))));
+  .catch(next));
 
 module.exports = {
   getCards, deleteCardById, createCard, likeCard, dislikeCard,
