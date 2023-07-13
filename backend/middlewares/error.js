@@ -1,10 +1,21 @@
+const IncorrectError = require('../utils/IncorrectError');
+const NotFoundError = require('../utils/NotFoundError');
+const ConflictError = require('../utils/ConflictError');
+const WrongDataError = require('../utils/WrongDataError');
+const LimitedAccessError = require('../utils/LimitedAccessError');
+
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
-  const { statusCode = 500, message } = err;
+  let error = err;
+
+  if (err.code === 11000) {
+    error = new ConflictError('Пользователь с таким имейлом уже существует');
+  }
+
   res
-    .status(statusCode)
+    .status(error.statusCode)
     .send({
-      message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
+      message: error.message,
     });
 };
 
