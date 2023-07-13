@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jsonWebToken = require('jsonwebtoken');
-const WrongDataError = require('../utils/WrongDataError');
+const AuthorizationError = require('../utils/AuthorizationError');
 const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
 const IncorrectError = require('../utils/IncorrectError');
@@ -69,7 +69,7 @@ const login = (
     const { email, password } = req.body;
     User.findOne({ email })
       .select('+password')
-      .orFail(() => new NotFoundError('Пользователь не найден'))
+      .orFail(() => new AuthorizationError('Ошибка авторизации'))
       .then((user) => {
         bcrypt.compare(String(password), user.password).then((isValidUser) => {
           if (isValidUser) {
@@ -79,7 +79,7 @@ const login = (
 
             res.send({ data: user.toJSON(), token: jwt });
           } else {
-            next(new WrongDataError('Ошибка авторизации'));
+            next(new AuthorizationError('Ошибка авторизации'));
           }
         });
       })
