@@ -1,6 +1,5 @@
 const Card = require('../models/card');
 const LimitedAccessError = require('../utils/LimitedAccessError');
-// const IncorrectError = require('../utils/IncorrectError');
 const NotFoundError = require('../utils/NotFoundError');
 
 const getCards = ((req, res, next) => {
