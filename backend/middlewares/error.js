@@ -13,6 +13,11 @@ const errorHandler = (err, req, res, next) => {
     error = new ConflictError('Пользователь с таким имейлом уже существует');
   } else if (err.name === 'CastError') {
     error = new IncorrectError('Переданы некоректные данные');
+  } else {
+    error = {
+      statusCode: 500,
+      message: 'Внутренняя ошибка',
+    };
   }
 
   res
